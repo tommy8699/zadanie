@@ -26,6 +26,6 @@ trait SecurityPresenterTrait
         ];
         Debugger::log($toLog);
 
-        $this->error('Omlouváme se, ale tuto akci není možné provést.', IResponse::S403_FORBIDDEN);
+        $this->error('Ospravedlňujem sa ale túto akciu nieje možné previesť.', IResponse::S403_FORBIDDEN);
     }
 }

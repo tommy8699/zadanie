@@ -1,35 +1,43 @@
 
 {block content}
 
-<div class="container">
-    <div class="row">
-    {foreach $products as $key => $product}
-        <div class="card-group border">
-             <img class="card-img-top" src="img_avatar1.png" alt="Card image">
-            <div class="card-body">
-                <h4 class="card-title">John Doe</h4>
-                <p class="card-text">Some example text.</p>
-                <button class="submitBtn btn btn-primary" data-productId="1">Kúpiť</button>
-                <span n:if="$productId == $key && $warehouseValue != null">{$warehouseValue}</span>
+    {snippet content}
+        <div class="container mt-5">
+            <div class="row">
+            <h4 class="font-weight-bold col-12">WEB Developer position for the jewelry e-shop - ŠPERKY s.r.o</h4>
+                {foreach $products as $key => $product}
+                    <div class="col-4 my-4">
+                            <div class="card-group border">
+                                <img class="card-img-top" src="no-image.jpeg" alt="Card image">
+                                <div class="card-body">
+                                    <h4 class="card-title">Test product</h4>
+                                    <button class="submitBtn btn btn-primary" data-productId="{$key}">Kúpiť</button>
+                                    {if $warehouseValue != null && key_exists($key, $warehouseValue)}
+                                        <span class="price font-weight-bold">{$warehouseValue[$key]}€</span>    
+                                    {/if}
+                                </div>
+                            </div>
+                    </div>        
+                {/foreach}
+            </div>
+            <div class="font-weight-bold col-12">
+                <span class="d-flex justify-content-end">Vypracoval Tomáš Hreško :)</span>
             </div>
         </div>
-    {/foreach}
-    </div>
-</div>
-	
-<script>
-    $(".submitBtn").on("click", function() {
-        let prodId = $(this).data("productId");
-        
-        $.nette.ajax({
-            url: {link getWarehouseValue!},
-            method: "POST",
-            data: {
-                "productId" : prodId,
-            }
-        });
 
-    });
-</script>
+        <script>
+            $(".submitBtn").on("click", function() {
+                let prodId = $(this).attr('data-productid');
+                $.nette.ajax({
+                    url: {link getWarehouseValue!},
+                    method: "POST",
+                    data: {
+                        "productId" : prodId,
+                    }
+                });
+
+            });
+        </script>
+    {/snippet}
 
 

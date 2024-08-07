@@ -8,15 +8,17 @@ use mysql_xdevapi\Exception;
 use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
+use Nette\Database\Connection;
 use Nette\SmartObject;
 
 abstract class BaseRepository
 {
     use SmartObject;
-
+    
 
     public function __construct(
         protected Explorer $explorer,
+        protected Connection $connection,
     ) { }
 
     public static abstract function getTableName(): string;
